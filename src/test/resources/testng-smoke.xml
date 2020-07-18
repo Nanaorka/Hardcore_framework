@@ -4,7 +4,7 @@
 <suite name = "Suite1">
     <test name = "test1">
         <classes>
-            <class name = "test.CompareCostsTest"/>
+            <class name = "test.CheckSetupFromEstimateTest"/>
         </classes>
     </test>
 </suite>
