@@ -13,9 +13,8 @@ public class CommonConditions {
     protected WebDriver driver;
 
     @BeforeClass()
-    public void setUpBrowser(){
-        driver= DriverSingleton.getDriver();
-        driver.manage().window().maximize();
+    public void setUpBrowser() {
+        driver = DriverSingleton.getDriver();
         new HomePageCloudGoogle(driver).openHomePage()
                 .startSearch()
                 .inputSearchEnquiry()

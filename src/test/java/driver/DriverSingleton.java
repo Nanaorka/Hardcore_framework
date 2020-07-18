@@ -6,15 +6,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DriverSingleton {
-    private static final String RESOURCE_PATH = "scr\\test\\resources";
     private static WebDriver driver;
 
     private DriverSingleton() {
     }
 
-    public static WebDriver getDriver(){
-        if (null == driver){
-            switch (System.getProperty("browser")){
+    public static WebDriver getDriver() {
+        if (null == driver) {
+            switch (System.getProperty("browser")) {
                 case "firefox": {
                     WebDriverManager.firefoxdriver().setup();
                     driver = new FirefoxDriver();
@@ -29,7 +28,7 @@ public class DriverSingleton {
         return driver;
     }
 
-    public static void closeDriver(){
+    public static void closeDriver() {
         driver.quit();
         driver = null;
     }

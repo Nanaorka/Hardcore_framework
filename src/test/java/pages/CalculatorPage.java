@@ -4,8 +4,6 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import models.Calculator;
 import service.CalculatorCreator;
 import service.GeneratorXpath;
@@ -16,13 +14,12 @@ import static util.MethodWait.waitElementToBeClickable;
 import static util.MethodWait.waitPresenceOfElementLocated;
 
 public class CalculatorPage extends AbstractPage {
-    JavascriptExecutor executor = (JavascriptExecutor) driver;
 
     public CalculatorPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
-
+    JavascriptExecutor executor = (JavascriptExecutor) driver;
     private Calculator calculator= CalculatorCreator.withCredentialsFromProperty();
     private GeneratorXpath generatorXpath=new GeneratorXpath();
     private static final By COMPUTER_ENGINE_BUTTON = By.xpath("//md-tab-item/*[@title='Compute Engine']");
@@ -39,7 +36,7 @@ public class CalculatorPage extends AbstractPage {
     private By VALUE_OF_DATACENTER_LOCATION_BUTTON = By.xpath(generatorXpath.getXpathForDatacenterLocation());
     private By VALUE_OF_COMMITTED_USAGE_BUTTON = By.xpath(generatorXpath.getXpathForCommitedUsage());
     private static final By VALUE_OF_VM_TYPE_FROM_ESTIMATE =
-            By.xpath("//div[@class='md-list-item-text ng-binding' and contains(.,'regular')]");
+            By.xpath("//div[@class='md-list-item-text ng-binding' and contains(.,'VM class')]");
     private static final By VALUE_OF_INSTANCE_TYPE_FROM_ESTIMATE =
             By.xpath("//div[@class='md-list-item-text ng-binding' and contains(.,'Instance type:')]");
     private static final By VALUE_OF_REGION_FROM_ESTIMATE =
@@ -48,7 +45,6 @@ public class CalculatorPage extends AbstractPage {
             By.xpath("//div[@class='md-list-item-text ng-binding' and contains(.,'Total available')]");
     private static final By VALUE_OF_COMMITMENT_TERM_FROM_ESTIMATE =
             By.xpath("//div[@class='md-list-item-text ng-binding' and contains(.,'Commitment')]");
-
 
     @FindBy(xpath = "//md-tab-item/*[@title='Compute Engine']")
     WebElement computerEngineButton;
@@ -210,7 +206,7 @@ public class CalculatorPage extends AbstractPage {
         ((JavascriptExecutor) driver).executeScript("window.open()");
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
-        driver.get("https://10minemail.com/ru/");
+        driver.get("https://10minutemail.com");
     }
 
     public CalculatorPage clickEmailEstimate() {
@@ -237,32 +233,27 @@ public class CalculatorPage extends AbstractPage {
     }
 
     public String getValueOfVMMachine() {
-        new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.presenceOfElementLocated(VALUE_OF_VM_TYPE_FROM_ESTIMATE));
+        waitPresenceOfElementLocated(driver, VALUE_OF_VM_TYPE_FROM_ESTIMATE);
         return driver.findElement(VALUE_OF_VM_TYPE_FROM_ESTIMATE).getText();
     }
 
     public String getValueInstanceType() {
-        new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.presenceOfElementLocated(VALUE_OF_INSTANCE_TYPE_FROM_ESTIMATE));
+        waitPresenceOfElementLocated(driver, VALUE_OF_INSTANCE_TYPE_FROM_ESTIMATE);
         return driver.findElement(VALUE_OF_INSTANCE_TYPE_FROM_ESTIMATE).getText();
     }
 
     public String getValueRegion() {
-        new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.presenceOfElementLocated(VALUE_OF_REGION_FROM_ESTIMATE));
+        waitPresenceOfElementLocated(driver, VALUE_OF_REGION_FROM_ESTIMATE);
         return driver.findElement(VALUE_OF_REGION_FROM_ESTIMATE).getText();
     }
 
     public String getValueLocalSSD() {
-        new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.presenceOfElementLocated(VALUE_OF_LOCAL_SSD_FROM_ESTIMATE));
+       waitPresenceOfElementLocated(driver, VALUE_OF_LOCAL_SSD_FROM_ESTIMATE);
         return driver.findElement(VALUE_OF_LOCAL_SSD_FROM_ESTIMATE).getText();
     }
 
     public String getCommitmentTerm() {
-        new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.presenceOfElementLocated(VALUE_OF_COMMITMENT_TERM_FROM_ESTIMATE));
+       waitPresenceOfElementLocated(driver, VALUE_OF_COMMITMENT_TERM_FROM_ESTIMATE);
         return driver.findElement(VALUE_OF_COMMITMENT_TERM_FROM_ESTIMATE).getText();
     }
 }

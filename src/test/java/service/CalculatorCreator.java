@@ -3,7 +3,7 @@ package service;
 import models.Calculator;
 
 public class CalculatorCreator {
-    public static final String NUMBER_OF_INSTANCES ="testData.valueOfNumberOfInstances";
+    public static final String NUMBER_OF_INSTANCES = "testData.valueOfNumberOfInstances";
     public static final String OPERATING_SYSTEM = "testData.valueOfOperatingSystem";
     public static final String MACHINE_CLASS = "testData.valueOfMachineClass";
     public static final String MACHINE_TYPE = "testData.valueOfMachineType";
@@ -13,10 +13,10 @@ public class CalculatorCreator {
     public static final String DATACENTER_LOCATION = "testData.valueOfDatacenterLocation";
     public static final String COMMITTED_USAGE = "testData.valueOfCommittedUsage";
 
-    public static Calculator withCredentialsFromProperty(){
+    public static Calculator withCredentialsFromProperty() {
         return new Calculator(TestDataReader.getTestData(NUMBER_OF_INSTANCES), TestDataReader.getTestData(OPERATING_SYSTEM),
-                TestDataReader.getTestData(MACHINE_CLASS),  TestDataReader.getTestData(MACHINE_TYPE),
-                TestDataReader.getTestData(NUMBER_OF_GPUS),  TestDataReader.getTestData(GPU_TYPE),
+                TestDataReader.getTestData(MACHINE_CLASS), TestDataReader.getTestData(MACHINE_TYPE),
+                TestDataReader.getTestData(NUMBER_OF_GPUS), TestDataReader.getTestData(GPU_TYPE),
                 TestDataReader.getTestData(LOCAL_SSD), TestDataReader.getTestData(DATACENTER_LOCATION),
                 TestDataReader.getTestData(COMMITTED_USAGE));
     }

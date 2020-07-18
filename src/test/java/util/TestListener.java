@@ -34,7 +34,6 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
-
     }
 
     @Override
@@ -43,16 +42,13 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onStart(ITestContext iTestContext) {
-
     }
 
     @Override
     public void onFinish(ITestContext iTestContext) {
-
     }
 
     public void saveScreenshot() {
-
         File screenCapture = ((TakesScreenshot) DriverSingleton
                 .getDriver())
                 .getScreenshotAs(OutputType.FILE);
@@ -60,14 +56,10 @@ public class TestListener implements ITestListener {
             FileUtils.copyFile(screenCapture, new File(".//target/screenshots/"
                     + getCurrentTimeAsString()
                     + ".png"));
-
-
         } catch (IOException e) {
             logger.error("Failed to save screenshots" + e.getLocalizedMessage());
-
         }
     }
-
 
     private String getCurrentTimeAsString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd_HH-mm-ss");

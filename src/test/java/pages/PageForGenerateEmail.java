@@ -1,15 +1,14 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
+
+import static util.MethodWait.waitElementToBeClickable;
+import static util.MethodWait.waitPresenceOfElementLocated;
 
 public class PageForGenerateEmail extends AbstractPage {
     public PageForGenerateEmail(WebDriver driver) {
@@ -17,23 +16,28 @@ public class PageForGenerateEmail extends AbstractPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath = "//button[@class='btn-rds icon-btn bg-theme click-to-copy']")
+    @FindBy(xpath = "//div[@id='copy_address']//span")
     WebElement copyEmailButton;
 
-    @FindBy(xpath = "//a[text()='Google Cloud Platform Price Estimate']")
+    @FindBy(xpath = "//span[@class='small_message_icon']")
     WebElement openMailButton;
 
     @FindBy(xpath = "//h3[contains(.,'USD')]")
     WebElement costFromEmail;
 
+    private static final By MAIL_ICON = By.xpath("//h3[contains(.,'USD')]");
+
     public PageForGenerateEmail openPage() {
-        driver.get("https://10minemail.com/ru/");
+        driver.get("https://10minutemail.com");
         return this;
     }
 
     public PageForGenerateEmail copyEmail() {
-        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(copyEmailButton));
-        copyEmailButton.click();
+        waitPresenceOfElementLocated(driver, By.xpath("//input[@id='mail_address']"));
+        waitElementToBeClickable(driver, copyEmailButton);
+        Actions builder = new Actions(driver);
+        builder.moveToElement(copyEmailButton).click(copyEmailButton).build().perform();
+        //copyEmailButton.click();
         return this;
     }
 
@@ -45,15 +49,13 @@ public class PageForGenerateEmail extends AbstractPage {
     }
 
     public PageForGenerateEmail openMail() {
-        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(openMailButton));
+        waitElementToBeClickable(driver, openMailButton);
         openMailButton.click();
         return this;
     }
 
     public String getCostFromEmail() {
-        new WebDriverWait(driver, 20)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h3[contains(.,'USD')]")));
+        waitPresenceOfElementLocated(driver, MAIL_ICON);
         return costFromEmail.getText();
     }
-
 }
