@@ -6,7 +6,7 @@ import pages.PageForGenerateEmail;
 
 import static org.junit.Assert.assertTrue;
 
-public class TestCompareCosts extends CommonConditions {
+public class CompareCostsTest extends CommonConditions {
 
     @Test
     public void compareCostsTest() {
