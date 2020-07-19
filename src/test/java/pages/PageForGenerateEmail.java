@@ -26,6 +26,7 @@ public class PageForGenerateEmail extends AbstractPage {
     WebElement costFromEmail;
 
     private static final By MAIL_ICON = By.xpath("//h3[contains(.,'USD')]");
+    private static final By EMAIL_ADDRESS = By.xpath("//input[@id='mail_address']");
 
     public PageForGenerateEmail openPage() {
         driver.get("https://10minutemail.com");
@@ -33,11 +34,10 @@ public class PageForGenerateEmail extends AbstractPage {
     }
 
     public PageForGenerateEmail copyEmail() {
-        waitPresenceOfElementLocated(driver, By.xpath("//input[@id='mail_address']"));
+        waitPresenceOfElementLocated(driver, EMAIL_ADDRESS);
         waitElementToBeClickable(driver, copyEmailButton);
         Actions builder = new Actions(driver);
         builder.moveToElement(copyEmailButton).click(copyEmailButton).build().perform();
-        //copyEmailButton.click();
         return this;
     }
 
