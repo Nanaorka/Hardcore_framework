@@ -6,36 +6,38 @@ public class GeneratorXpath {
     private Calculator calculator = CalculatorCreator.withCredentialsFromProperty();
 
     public String getXpathForOperatingSystemValue() {
-        return "//md-option/div[text()[contains(.,'" + calculator.getOperatingSystem() + "')]]";
+        return String.format("//md-option/div[text()[contains(.,'%s')]]", calculator.getOperatingSystem());
     }
 
     public String getXpathForMachineClass() {
-        return "//div[@class='md-select-menu-container md-active md-clickable']//div[text()='"
-                + calculator.getMachineClass() + "']";
+        return String.format("//div[@class='md-select-menu-container md-active md-clickable']//div[text()='%s']",
+                calculator.getMachineClass());
     }
 
     public String getXpathForMachineType() {
-        return "//md-option//div[text()[contains(.,'" + calculator.getMachineType() + "')]]";
+        return String.format("//md-option//div[text()[contains(.,'%s')]]", calculator.getMachineType());
     }
 
     public String getXpathForNumberOfGpus() {
-        return "//div[@class='md-select-menu-container md-active md-clickable']//md-option[@value='"
-                + calculator.getNumberOfGpus() + "']";
+        return String.format("//div[@class='md-select-menu-container md-active md-clickable']//md-option[@value='%s']",
+                calculator.getNumberOfGpus());
     }
 
     public String getXpathForGpuType() {
-        return "//md-option//div[text()[contains(.,'" + calculator.getGpuType() + "')]]";
+        return String.format("//md-option//div[text()[contains(.,'%s')]]", calculator.getGpuType());
     }
 
     public String getXpathForLocalSSD() {
-        return "//md-option//div[text()[contains(.,'" + calculator.getLocalSSD() + "')]]";
+        return String.format("//md-option//div[text()[contains(.,'%s')]]", calculator.getLocalSSD());
     }
 
     public String getXpathForDatacenterLocation() {
-        return "//div[@id='select_container_88']//div[text()[contains(.,'" + calculator.getDatacenterLocation() + "')]]";
+        return String.format("//div[@id='select_container_88']//div[text()[contains(.,'%s')]]",
+                calculator.getDatacenterLocation());
     }
 
     public String getXpathForCommitedUsage() {
-        return "//div[@id='select_container_95']//div[text()[contains(.,'" + calculator.getCommittedUsage() + "')]]";
+        return String.format("//div[@id='select_container_95']//div[text()[contains(.,'%s')]]",
+                calculator.getCommittedUsage());
     }
 }
